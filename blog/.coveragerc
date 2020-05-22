@@ -1,0 +1,5 @@
+[run]
+include = blog/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
