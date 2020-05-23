@@ -299,11 +299,12 @@ SOCIALACCOUNT_ADAPTER = (
     "blog.users.adapters.SocialAccountAdapter"
 )
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 
 # CKEDITOR
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
+        'extraPlugins': ['codesnippet', 'markdown'],
     },
 }
