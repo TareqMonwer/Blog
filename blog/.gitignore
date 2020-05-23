@@ -322,3 +322,5 @@ blog/media/
 
 
 .env
+
+.pytest_cache/

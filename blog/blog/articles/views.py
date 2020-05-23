@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Article
 
@@ -14,3 +14,7 @@ class ArticleList(ListView):
     context['last_article'] = last_article
     return context
     
+
+class ArticleDetail(DetailView):
+  model = Article
+  template_name = 'articles/detail.html'

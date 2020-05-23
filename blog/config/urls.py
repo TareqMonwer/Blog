@@ -7,10 +7,6 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     path(
-        "",
-        include("blog.articles.urls")
-    ),
-    path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
@@ -23,7 +19,13 @@ urlpatterns = [
         include("blog.users.urls", namespace="users"),
     ),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    # CKeditor
+    path("ckeditor/", include('ckeditor_uploader.urls')),
+    # Local app urls
+    path(
+        "",
+        include("blog.articles.urls")
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

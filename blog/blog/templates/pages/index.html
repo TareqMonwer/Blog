@@ -9,7 +9,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>{{ last_article.title }}</h1>
-            <span class="subheading">{{ last_article.content|truncatewords:10 }}</span>
+            <span class="subheading">{{ last_article.content|safe|truncatewords:10 }}</span>
           </div>
         </div>
       </div>
@@ -22,17 +22,17 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         {% for article in object_list %}
           <div class="post-preview">
-            <a href="post.html">
+            <a href="{% url 'articles:detail' article.slug %}">
               <h2 class="post-title">
                 {{article.title}}
               </h2>
               <h3 class="post-subtitle">
-                {{article.content|truncatewords:20}}
+                {{article.content|safe|truncatewords:20}}
               </h3>
             </a>
             <p class="post-meta">Posted by
               <a href="#">{{ article.author.name }}</a>
-              on July 8, 2019</p>
+              on {{ article.created }}</p>
           </div>
           <hr>
         {% endfor %}
