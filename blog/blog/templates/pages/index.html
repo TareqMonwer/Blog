@@ -24,10 +24,10 @@
           <div class="post-preview">
             <a href="{% url 'articles:detail' article.slug %}">
               <h2 class="post-title">
-                {{article.title}}
+                {{ article.title }}
               </h2>
               <h3 class="post-subtitle">
-                {{article.content|safe|truncatewords:20}}
+                {{ article.short_description|safe }}
               </h3>
             </a>
             <p class="post-meta">Posted by
