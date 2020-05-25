@@ -4,14 +4,43 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1>
-  <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="control-group">
-      <div class="controls">
-        <button type="submit" class="btn btn-primary">Update</button>
+
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>
+              {% if object.name %}
+                {{ object.name }}
+              {% else %}
+                {{ object.username }}
+              {% endif %}
+            </h1>
+            {# TODO: Implement user.bio #}
+            <span class="subheading">
+              {% if object.bio %}
+                {{ object.bio }}
+              {% else %}
+                Bio:
+              {% endif %}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-  </form>
+  </header>
+
+  <div class="container">
+    <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock %}

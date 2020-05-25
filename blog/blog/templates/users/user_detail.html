@@ -4,33 +4,51 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
-<div class="container">
 
-  <div class="row">
-    <div class="col-sm-12">
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container pb-3">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading pb-3">
+            <h1>
+              {% if object.name %}
+                {{ object.name }}
+              {% else %}
+                {{ object.username }}
+              {% endif %}
+            </h1>
+            {# TODO: Implement user.bio #}
+            <span class="subheading">
+              {% if object.bio %}
+                {{ object.bio }}
+              {% else %}
+                Bio:
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
 
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
+      {% if object == request.user %}
+        <!-- Action button row -->
+        <div class="row justify-content-center">
+          <!-- Action buttons -->
+          <div class="col-sm-12 text-center">
+            <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+            <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+          </div>
+          <!-- End Action buttons -->
+        </div>
       {% endif %}
     </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+
   </div>
-
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
-
-
-</div>
+  <!-- Footer -->
+  {% include 'inc/_footer.html' %}
 {% endblock content %}
 
