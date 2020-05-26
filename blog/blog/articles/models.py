@@ -10,6 +10,12 @@ from model_utils.models import TimeStampedModel
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()\
+            .filter(status='published')
+
+
 class Article(TimeStampedModel):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -25,6 +31,9 @@ class Article(TimeStampedModel):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
+
+    objects = models.Manager()   # Default manager.
+    published = PublishedManager()   # Custom published manager.
 
     class Meta:
         ordering = ['-created']
