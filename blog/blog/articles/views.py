@@ -9,7 +9,7 @@ class ArticleList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        last_article = Article.objects.last()
+        last_article = Article.published.first()
         context['last_article'] = last_article
         return context
 

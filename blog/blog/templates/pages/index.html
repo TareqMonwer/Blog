@@ -9,7 +9,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>{{ last_article.title }}</h1>
-            <span class="subheading">{{ last_article.content|safe|truncatewords:10 }}</span>
+            <span class="subheading">{{ last_article.short_description|safe }}</span>
           </div>
         </div>
       </div>
