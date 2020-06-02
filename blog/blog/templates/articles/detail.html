@@ -19,10 +19,24 @@
     </div>
   </header>
 
+
   <!-- Post Content -->
   <article>
     <div class="container">
       <div class="row">
+        <div class="col-lg-2 col-md-2 d-flex flex-column
+          justify-content-center align-items-center text-center">
+          <a class="mb-4 d-inline-block" href="">
+            <i class="fa fa-heart"></i>
+          </a>
+            <h3>34</h3>
+            <a href="">
+              {# TODO: link to list all who appreciated #}
+              <small>
+                people appreciated
+              </small>
+            </a>
+        </div>
         <div class="col-lg-8 col-md-10 mx-auto" style="word-wrap: break-word;">
           {{ object.content|safe }}
         </div>

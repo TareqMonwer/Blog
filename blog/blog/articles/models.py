@@ -34,6 +34,7 @@ class Article(TimeStampedModel):
 
     objects = models.Manager()   # Default manager.
     published = PublishedManager()   # Custom published manager.
+    likes = models.ManyToManyField('Like', related_name='article_liked', blank=True)
 
     class Meta:
         ordering = ['-created']
@@ -50,3 +51,11 @@ class Article(TimeStampedModel):
         text = ''.join(BeautifulSoup(html).findAll(text=True))
         text = text.replace('\xa0', ' ').replace('\n', ' ').split(' ')
         return ' '.join(text[:choice(choices)])
+
+
+class Like(TimeStampedModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} liked {self.article.title}'
