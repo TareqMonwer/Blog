@@ -9,10 +9,17 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1>{{object.title}}</h1>
-            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+            {#  TODO: Implement subheading #}
+            {# <h2 class="subheading">{{ object.subheading }}</h2>#}
             <span class="meta">Posted by
-              <a href="#">{{object.author.name}}</a>
-              {{object.created}}</span>
+              <a href="#">
+                {% if object.user.name %}
+                  {{object.author.name}}
+                {% else %}
+                  {{ object.author.username }}
+                {% endif %}
+              </a>
+               at {{object.created}}</span>
           </div>
         </div>
       </div>

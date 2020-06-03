@@ -8,9 +8,13 @@ urlpatterns = [
     path('',
          views.ArticleList.as_view(),
          name='home'
-    ),
+         ),
+    path('new/',
+         views.ArticleCreate.as_view(),
+         name='create'
+         ),
     path('<slug:slug>/',
          views.ArticleDetail.as_view(),
          name='detail'
-    ),
+         ),
 ]

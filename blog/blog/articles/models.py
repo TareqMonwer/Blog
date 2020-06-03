@@ -25,8 +25,7 @@ class Article(TimeStampedModel):
     slug = AutoSlugField("Article Address", unique=True,
                          always_update=False, populate_from='title')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               null=True,
-                               on_delete=models.SET_NULL)
+                               on_delete=models.DO_NOTHING)
     content = RichTextUploadingField(config_name='default')
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,

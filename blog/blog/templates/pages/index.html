@@ -21,6 +21,12 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
+    <div class="col-lg-2 col-md-2 d-flex flex-column
+      justify-content-start align-items-center text-center">
+      <a href="{% url 'articles:create' %}" title="Publish new article">
+        <i class="far fa-plus-square fa-3x"></i>
+      </a>
+    </div>
       <div class="col-lg-8 col-md-10 mx-auto">
         {% for article in object_list %}
           <div class="post-preview">

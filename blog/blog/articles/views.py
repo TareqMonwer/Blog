@@ -1,9 +1,12 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Article, Like
 
 
 class ArticleList(ListView):
+    """
+    Returns a list of published articles.
+    """
     model = Article
     template_name = 'pages/index.html'
 
@@ -24,7 +27,17 @@ class ArticleDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         obj = super().get_object()
-        context = super(ArticleDetail, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         likes = Like.objects.filter(article=obj)
         context['likes'] = likes
         return context
+
+
+class ArticleCreate(CreateView):
+    model = Article
+    template_name_suffix = '_create_form'
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

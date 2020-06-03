@@ -306,5 +306,6 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'extraPlugins': ['codesnippet', 'markdown'],
+        'width': '100%',
     },
 }
