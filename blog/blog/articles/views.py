@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import ListView, DetailView, CreateView
 
 from braces.views import LoginRequiredMixin
@@ -26,6 +27,13 @@ class ArticleList(ListView):
 class ArticleDetail(DetailView):
     model = Article
     template_name = 'articles/detail.html'
+
+    def get_object(self, qs=None):
+        obj = super().get_object(queryset=qs)
+        # If user is not the author of article
+        if obj.author != self.request.user:
+            raise Http404()
+        return obj
 
     def get_context_data(self, **kwargs):
         obj = super().get_object()
