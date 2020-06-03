@@ -10,4 +10,5 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):
-    pass
+    # TODO: Display obj __str__ representation in list display.
+    list_display = ['__str__', 'created']
