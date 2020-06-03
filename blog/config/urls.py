@@ -5,6 +5,13 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+
+# Admin site replace 'Django administration' text.
+admin.site.site_header = "Blog Admin"
+admin.site.site_title = "Blog Admin Panel"
+admin.site.index_title = "Welcome to Blog Admin"
+
+
 urlpatterns = [
     path(
         "about/",
