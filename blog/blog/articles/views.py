@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 
+from braces.views import LoginRequiredMixin
+
 from .models import Article, Like
 
 
@@ -33,7 +35,7 @@ class ArticleDetail(DetailView):
         return context
 
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Article
     template_name_suffix = '_create_form'
     fields = ['title', 'content']

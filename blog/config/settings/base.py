@@ -22,6 +22,8 @@ if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(BASE_DIR.path(".env")))
 DB_PASSWORD = env('DB_PASSWORD')
+DB_NAME = env('DB_NAME')
+DB_USER = env('DB_USER')
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -52,8 +54,8 @@ DATABASES = {
     # if DATABASE_URL Not in os.environ
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'postgres',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': '127.0.0.1',
         'PORT': '5432',

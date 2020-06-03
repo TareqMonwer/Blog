@@ -36,6 +36,7 @@ a {
 
 a:focus, a:hover {
   color: #0085A1;
+  text-decoration: none;
 }
 
 blockquote {
@@ -192,6 +193,10 @@ header.masthead .post-heading,
 header.masthead .site-heading {
   padding: 200px 0 150px;
   color: white;
+}
+
+header.masthead .post-heading h1 {
+  text-transform: capitalize;
 }
 
 @media only screen and (min-width: 768px) {
