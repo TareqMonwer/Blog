@@ -1,5 +1,6 @@
 from django.http import Http404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import (ListView, DetailView,
+                                  CreateView, UpdateView)
 
 from braces.views import LoginRequiredMixin
 
@@ -45,9 +46,14 @@ class ArticleDetail(DetailView):
 
 class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Article
-    template_name_suffix = '_create_form'
+    # template_name_suffix = '_create_form'
     fields = ['title', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
+    model = Article
+    fields = ['title', 'content']

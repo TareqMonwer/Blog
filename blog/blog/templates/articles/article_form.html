@@ -3,7 +3,13 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Post new article" %}{% endblock %}
+{% block head_title %}
+  {% if object %}
+    {% trans "Update Article" %}
+  {% else %}
+    {% trans "Publish new article" %}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
    <!-- Page Header -->
@@ -13,7 +19,11 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1>{% trans "Publish new article" %}</h1>
+            {% if object %}
+              <h1>{% trans "Update Article" %}</h1>
+            {% else %}
+              <h1>{% trans "Publish new article" %}</h1>
+            {% endif %}
             <h2 class="subheading">Keep your article clear, understandable and
             informative.</h2>
           </div>

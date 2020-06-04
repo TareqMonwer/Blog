@@ -13,6 +13,9 @@ urlpatterns = [
          views.ArticleCreate.as_view(),
          name='create'
          ),
+    path('<slug:slug>/update/',
+         views.ArticleUpdate.as_view(),
+         name='update'),
     path('<slug:slug>/',
          views.ArticleDetail.as_view(),
          name='detail'
