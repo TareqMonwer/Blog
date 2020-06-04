@@ -5,6 +5,7 @@ from django.views.generic import (ListView, DetailView,
 from braces.views import LoginRequiredMixin
 
 from .models import Article, Like
+from .mixins import AuthorArticleMixin, AuthorArticleEditMixin
 
 
 class ArticleList(ListView):
@@ -32,7 +33,7 @@ class ArticleDetail(DetailView):
     def get_object(self, qs=None):
         obj = super().get_object(queryset=qs)
         # If user is not the author of article
-        if obj.author != self.request.user:
+        if obj.status == 'draft' and obj.author != self.request.user:
             raise Http404()
         return obj
 
@@ -44,9 +45,8 @@ class ArticleDetail(DetailView):
         return context
 
 
-class ArticleCreate(LoginRequiredMixin, CreateView):
+class ArticleCreate(AuthorArticleEditMixin, CreateView):
     model = Article
-    # template_name_suffix = '_create_form'
     fields = ['title', 'content']
 
     def form_valid(self, form):
@@ -54,6 +54,6 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ArticleUpdate(LoginRequiredMixin, UpdateView):
+class ArticleUpdate(AuthorArticleEditMixin, UpdateView):
     model = Article
     fields = ['title', 'content']
