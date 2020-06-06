@@ -1,11 +1,13 @@
 from django.http import Http404
+from django.shortcuts import redirect
+from django.views import View
 from django.views.generic import (ListView, DetailView,
                                   CreateView, UpdateView)
 
 from braces.views import LoginRequiredMixin
 
 from .models import Article, Like
-from .mixins import AuthorArticleMixin, AuthorArticleEditMixin
+from .mixins import AuthorArticleEditMixin
 
 
 class ArticleList(ListView):
@@ -57,3 +59,11 @@ class ArticleCreate(AuthorArticleEditMixin, CreateView):
 class ArticleUpdate(AuthorArticleEditMixin, UpdateView):
     model = Article
     fields = ['title', 'content']
+
+
+class ArticleLike(View):
+    def post(self, request, slug):
+        user = request.user
+        article = Article.objects.get(slug=slug)
+        Like.objects.create(user=user, article=article)
+        return redirect(article.get_absolute_url())

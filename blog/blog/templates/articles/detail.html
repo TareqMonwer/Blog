@@ -41,9 +41,13 @@
       <div class="row">
         <div class="col-lg-2 col-md-2 d-flex flex-column
           justify-content-center align-items-center text-center">
-          <a class="d-inline-block" href="">
-            <i class="fa fa-heart"></i>
-          </a>
+          <form id="like_form" action="{% url 'articles:like' object.slug  %}" method="POST">
+            {% csrf_token %}
+            <a class="d-inline-block" href="javascript:{}"
+            onclick="document.getElementById('like_form').submit(); return false;">
+              <i class="fa fa-heart"></i>
+            </a>
+          </form>
             <h3 class="m-0">{{ likes.count }}</h3>
             <a href="">
               {# TODO: link to list all who appreciated #}

@@ -25,7 +25,7 @@ class Article(TimeStampedModel):
     slug = AutoSlugField("Article Address", unique=True,
                          always_update=False, populate_from='title')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               on_delete=models.DO_NOTHING)
+                               on_delete=models.CASCADE)
     content = RichTextUploadingField(config_name='default')
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
@@ -53,7 +53,7 @@ class Article(TimeStampedModel):
 
 
 class Like(TimeStampedModel):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     def __str__(self):
