@@ -15,6 +15,7 @@ class ArticleList(ListView):
     Returns a list of published articles.
     """
     model = Article
+    paginate_by = 10
     template_name = 'pages/index.html'
 
     def get_context_data(self, **kwargs):
