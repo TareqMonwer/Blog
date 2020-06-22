@@ -43,12 +43,13 @@
           justify-content-center align-items-center text-center">
           <form id="like_form" action="{% url 'articles:like' object.slug  %}" method="POST">
             {% csrf_token %}
-            <a class="d-inline-block" href="javascript:{}"
+            <!-- <a class="d-inline-block" href="javascript:{}"
             onclick="document.getElementById('like_form').submit(); return false;">
               <i class="fa fa-heart"></i>
-            </a>
+            </a> -->
+            <i class="fa fa-heart" id="like-btn" style="cursor: pointer;"></i>
           </form>
-            <h3 class="m-0">{{ likes.count }}</h3>
+            <h3 class="m-0" id="display-like-count">{{ likes.count }}</h3>
             <a href="">
               {# TODO: link to list all who appreciated #}
               <small>
@@ -72,3 +73,28 @@
   {% include 'inc/_footer.html' %}
 
 {% endblock content %}
+
+
+{% block pagejs %}
+
+<script>
+  $("#like-btn").click(function(){
+  $.ajax({
+    type: "POST",
+    url: "{% url 'articles:like' object.slug  %}",
+    data: {'slug': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+    success: function(response) {
+      updateLikes();
+    },
+    error: function(){
+      console.log(res.responseText);
+    }
+  })
+})
+
+function updateLikes(){
+  document.getElementById("display-like-count").innerHTML = 
+  parseInt(document.getElementById("display-like-count").innerText) + 1;
+}
+</script>
+{% endblock pagejs %}
