@@ -1,12 +1,26 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from .models import Article, Like
 
 
-@admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'status']
 
+# Resources for import export.
+class ArticleResource(resources.ModelResource):
+    class Meta:
+        model = Article
+
+
+# Admin classes.
+class ArticleAdmin(ImportExportModelAdmin):
+    list_display = ['title', 'author', 'status']
+    resource_class = ArticleResource
+
+
+
+# Registers
+admin.site.register(Article, ArticleAdmin)
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):

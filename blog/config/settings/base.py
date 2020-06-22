@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "ckeditor",
     "ckeditor_uploader",
+    "import_export",
 ]
 
 LOCAL_APPS = [

@@ -17,3 +17,4 @@ django-crispy-forms==1.9.0  # https://github.com/django-crispy-forms/django-cris
 django-autoslug==1.9.7  # https://github.com/justinmayer/django-autoslug/
 django-ckeditor==5.9.0  #https://developpaper.com/django-building-personal-blogs-using-django-ckeditor-rich-text-editor/
 django-braces==1.14.0   #https://django-braces.readthedocs.io/en/latest/
+django-import-export==2.2.0   #https://django-import-export.readthedocs.io
