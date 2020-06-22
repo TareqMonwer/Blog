@@ -3,7 +3,13 @@
 {% block content %}
   <!-- Page Header -->
   {% if page_obj.number == 1 %}
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" 
+   {% if last_article.featured_image %}
+   style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+           url('{{ last_article.featured_image.url }}')"
+   {% else %}
+     style="background-image: url('img/post-bg.jpg')"
+   {% endif %}>
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -74,5 +80,6 @@
   {% include 'inc/_footer.html' %}
 
 {% endblock content %}
+
 
 

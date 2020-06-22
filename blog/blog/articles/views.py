@@ -20,7 +20,7 @@ class ArticleList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        last_article = Article.published.first()
+        last_article = Article.published.latest()
         context['last_article'] = last_article
         return context
 
@@ -50,7 +50,7 @@ class ArticleDetail(DetailView):
 
 class ArticleCreate(AuthorArticleEditMixin, CreateView):
     model = Article
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'featured_image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -59,7 +59,7 @@ class ArticleCreate(AuthorArticleEditMixin, CreateView):
 
 class ArticleUpdate(AuthorArticleEditMixin, UpdateView):
     model = Article
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'featured_image']
 
 
 class ArticleLike(View):

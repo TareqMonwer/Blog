@@ -2,7 +2,13 @@
 
 {% block content %}
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/post-bg.jpg')">
+  <header class="masthead" 
+  {% if object.featured_image %}
+  style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url('{{ object.featured_image.url }}')"
+  {% else %}
+    style="background-image: url('img/post-bg.jpg')"
+  {% endif %}>
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -11,7 +17,7 @@
             <h1>
               {{object.title}}
               {% if request.user == object.author %}
-                <a href="{% url 'articles:update' object.slug %}"
+                <a class="text-warning" href="{% url 'articles:update' object.slug %}"
                   title="Edit Article">
                   <i class="fas fa-pen-square"></i>
                 </a>
@@ -57,7 +63,7 @@
               </small>
             </a>
         </div>
-        <div class="col-lg-8 col-md-10 mx-auto" style="word-wrap: break-word;">
+        <div class="col-lg-10 col-md-10 mx-auto" style="word-wrap: break-word;">
           {{ object.content|safe }}
         </div>
       </div>

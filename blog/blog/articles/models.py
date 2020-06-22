@@ -22,6 +22,7 @@ class Article(TimeStampedModel):
         ('published', 'Published')
     )
     title = models.CharField("Article Title", max_length=255)
+    featured_image = models.ImageField(upload_to="featured_images", blank=True)
     slug = AutoSlugField("Article Address", unique=True,
                          always_update=False, populate_from='title')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -36,7 +37,8 @@ class Article(TimeStampedModel):
     likes = models.ManyToManyField('Like', related_name='article_liked', blank=True)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['created']
+        get_latest_by = "created"
 
     def __str__(self):
         return self.title
