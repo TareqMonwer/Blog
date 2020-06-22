@@ -24,7 +24,7 @@ class ArticleList(ListView):
         return context
 
     def get_queryset(self):
-        qs = Article.published.all()
+        qs = Article.published.select_related('author').select_related().all()
         return qs
 
 
